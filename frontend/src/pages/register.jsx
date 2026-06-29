@@ -1,11 +1,13 @@
 import { useState } from "react"
 import api from '../../api/axios'
+import {useNavigate} from 'react-router-dom'
 const RegisterPage = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     
     const [error, setError] = useState('')
+
 
     const handleRegister = async () => {
         try{
@@ -17,13 +19,21 @@ const RegisterPage = () => {
             alert('successful registration')
         }
         catch(err){
-            setError('Invalid')
+            console.log(err.response.data)
+            setError(JSON.stringify(err.response.data))
         }
+    }
+
+    const navigate = useNavigate()
+
+    const transferRegister = () => {
+        navigate('/')
     }
 
 
     return(
         <div>
+            <h1>Register</h1>
             <input
                 placeholder="username"
                 value={username}
@@ -44,6 +54,8 @@ const RegisterPage = () => {
 
             {error && <p>{error}</p>}
             <button onClick={handleRegister}>Register</button>
+            <br/>
+            <button onClick={transferRegister}>Already have an account? Login here.</button>
         </div>
     )
 }
