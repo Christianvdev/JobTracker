@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 class JobListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = JobSerializer
-    
+
 
     def get_queryset(self):
         return JobApplication.objects.filter(
