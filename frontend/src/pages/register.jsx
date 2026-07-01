@@ -39,19 +39,20 @@ const RegisterPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
-
+            <br/>
             <input
                 placeholder="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
+            <br/>
             <input
                 type="password"
                 placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-
+            <br/>
             {error && <p>{error}</p>}
             <button onClick={handleRegister}>Register</button>
             <br/>

@@ -6,7 +6,7 @@ const SubmitJob = () => {
     const [companyName, setCompanyName] = useState('')
     const [roleTitle,setRoleTitle] = useState('')
     const [jobLink, setJobLink] = useState('')
-    const [status, setStatus] = useState('applied')
+    const [status, setStatus] = useState(1)
     const [notes, setNotes] = useState('')
 
 
@@ -25,7 +25,8 @@ const SubmitJob = () => {
                 company_name: companyName,
                 role_title: roleTitle,
                 job_link: jobLink,
-                notes
+                notes,
+                status
             })
             navigate('/dashboard')
         }
@@ -57,16 +58,19 @@ const SubmitJob = () => {
             />
             <br/>
             <input
-                placeholder="Status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-            />
-            <br/>
-            <input
                 placeholder="Notes"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
             />
+            <select value={status} onChange={(e) => setStatus(Number(e.target.value))}>
+                <option value="">Select status</option>
+                <option value="1">Applied</option>
+                <option value="2">Interviewing</option>
+                <option value="3">Offer_received</option>
+                <option value="4">Hired</option>
+                <option value="5">Not_selected_by_employer</option>
+                <option value="6">No_longer_interested</option>
+            </select>
 
             <button onClick={handleSubmit}>Submit</button>
         </div>

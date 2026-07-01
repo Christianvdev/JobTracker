@@ -46,12 +46,14 @@ const LoginPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
+            <br/>
             <input
                 placeholder="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <br/>
             <button onClick={handleSubmit}>Login</button>
             <br/>
             <button onClick={transferRegister}>Register here.</button>

@@ -4,8 +4,8 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
-import DashboardPage from './pages/Dashboard'
 import SubmitJob from './pages/AddJob'
+import { DashboardPage, EditJob } from './pages/Dashboard'
 
 function App() {
   return (
@@ -28,6 +28,10 @@ function App() {
           <Route
             path='/add-job'
             element={<SubmitJob/>}
+          />
+          <Route
+            path='/edit-job/:id'
+            element={<EditJob/>}
           />
           </Routes>
     </BrowserRouter>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import api from '../../api/axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 const DashboardPage = () => {
     const [applications, setApplications] = useState([])
+    const [expandedId, setExpandedId] = useState(null)
     const navigate = useNavigate()
     useEffect(() => {
         const token = localStorage.getItem('access_token')
@@ -50,6 +51,18 @@ const DashboardPage = () => {
         }
     
 
+
+
+        const statusLabels = {
+            1: "Applied",
+            2: "Interviewing",
+            3: "Offer received",
+            4: "Hired",
+            5: "Not selected by employer",
+            6: "No longer interested",
+        }
+
+        
      return(
             <div>
                 <h1>applications</h1>
@@ -63,10 +76,16 @@ const DashboardPage = () => {
 
                         <h3>Date applied</h3>
                         <p>{app.date_applied}</p>
-                        <h4>Notes</h4>
-                        <p>{app.notes}</p>
+                        <button onClick={() => setExpandedId(expandedId === app.id ? null : app.id)}>
+                            {expandedId === app.id ? "Hide Notes" : "Show Notes"}
+                        </button>
+                        {expandedId === app.id && <p>{app.notes}</p>}
+                        <br/>
+                        <h1>status:</h1>
+                        <p>{statusLabels[app.status]}</p>
                         <br/>
                         <button onClick={() => RemoveJob(app.id)}>remove</button>
+                        <button onClick={() => navigate(`/edit-job/${app.id}`)}>edit</button>
                     </div>
                     
                 ))}
@@ -78,4 +97,96 @@ const DashboardPage = () => {
         )
 }
 
-export default DashboardPage
+
+const EditJob = () => {
+    const [companyName, setCompanyName] = useState('')
+    const [roleTitle,setRoleTitle] = useState('')
+    const [jobLink, setJobLink] = useState('')
+    const [status, setStatus] = useState(1)
+    const [notes, setNotes] = useState('')
+
+    const {id}  = useParams()
+    
+    const navigate = useNavigate()
+    useEffect(() =>{
+
+        const fetchJob = async () => {
+
+        const res = await api.get(`api/jobs/${id}/`)
+            setCompanyName(res.data.company_name)
+            setRoleTitle(res.data.role_title)
+            setJobLink(res.data.job_link)
+            setNotes(res.data.notes)
+            setStatus(res.data.status)
+        }
+
+
+
+        const token = localStorage.getItem('access_token')
+        if(!token){
+            navigate('/')
+        }
+
+        fetchJob()
+    }, [id])
+
+
+    const handleSubmit = async () => {
+        try{
+            const response = await api.put(`api/jobs/${id}/`,{
+                company_name: companyName,
+                role_title: roleTitle,
+                job_link: jobLink,
+                status,
+                notes
+            })
+            navigate('/dashboard')
+        }
+        catch(err){
+            console.log('Error status', err.response.status)
+            console.log('Error data', err.response.data)
+        }
+    }
+
+
+    return(
+        <div>
+            <input
+                placeholder="Company Name"
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+            />
+            <br/>
+            <input
+                placeholder="Role title"
+                value={roleTitle}
+                onChange={(e) => setRoleTitle(e.target.value)}
+            />
+            <br/>
+            <input
+                placeholder="Job link"
+                value={jobLink}
+                onChange={(e) => setJobLink(e.target.value)}
+            />
+            <br/>
+            <input
+                placeholder="Notes"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+            />
+            <select value={status} onChange={(e) => setStatus(Number(e.target.value))}>
+                <option value="">Select status</option>
+                <option value="1">Applied</option>
+                <option value="2">Interviewing</option>
+                <option value="3">Offer_received</option>
+                <option value="4">Hired</option>
+                <option value="5">Not_selected_by_employer</option>
+                <option value="6">No_longer_interested</option>
+            </select>
+
+            <button onClick={handleSubmit}>Submit</button>
+        </div>
+    )
+}
+
+export {DashboardPage, EditJob}

@@ -19,7 +19,7 @@ class JobListCreateView(generics.ListCreateAPIView):
             user=self.request.user
         )
 
-class JobDetailView(generics.RetrieveDestroyAPIView):
+class JobDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = JobSerializer
 
