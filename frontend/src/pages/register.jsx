@@ -1,3 +1,5 @@
+import '../styles/Register.css'
+
 import { useState } from "react"
 import api from '../../api/axios'
 import {useNavigate} from 'react-router-dom'
@@ -32,7 +34,7 @@ const RegisterPage = () => {
 
 
     return(
-        <div>
+        <div className='register'>
             <h1>Register</h1>
             <input
                 placeholder="username"

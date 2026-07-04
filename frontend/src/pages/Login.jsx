@@ -1,3 +1,5 @@
+import '../styles/Login.css'
+
 import { useEffect, useState } from "react"
 import api from '../../api/axios'
 import {Navigate, useNavigate} from 'react-router-dom'
@@ -24,7 +26,6 @@ const LoginPage = () => {
             })
             localStorage.setItem('access_token', response.data.access)
             localStorage.setItem('refresh_token', response.data.refresh)
-            alert("Logged in!")
             navigate('/dashboard')
         }
         catch(err){
@@ -39,7 +40,7 @@ const LoginPage = () => {
     }
 
     return(
-        <div>
+        <div className="login">
             <h1>Login</h1>
             <input
                 placeholder="username"

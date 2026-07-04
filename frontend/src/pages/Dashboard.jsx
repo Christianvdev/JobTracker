@@ -1,6 +1,9 @@
+import '../styles/Dashboard.css'
+
 import { useEffect, useState } from 'react'
 import api from '../../api/axios'
 import { useNavigate, useParams } from 'react-router-dom'
+
 
 
 const DashboardPage = () => {
@@ -51,8 +54,6 @@ const DashboardPage = () => {
         }
     
 
-
-
         const statusLabels = {
             1: "Applied",
             2: "Interviewing",
@@ -64,36 +65,43 @@ const DashboardPage = () => {
 
         
      return(
-            <div>
-                <h1>applications</h1>
-                {applications.map(app => (
-                    <div key={app.id}>
-                        <h3>Company Name:</h3>
-                        <p>{app.company_name}</p>
+            <div className="dashboard">
+            <h1>applications</h1>
+            {applications.map(app => (
+                <div className="job-card" key={app.id}>
+                    
+                    <h3>Company Name:</h3>
+                    <p>{app.company_name}</p>
 
-                        <h3>Role title:</h3>
-                        <p>{app.role_title}</p>
+                    <h3>Role title:</h3>
+                    <p>{app.role_title}</p>
 
-                        <h3>Date applied</h3>
-                        <p>{app.date_applied}</p>
-                        <button onClick={() => setExpandedId(expandedId === app.id ? null : app.id)}>
-                            {expandedId === app.id ? "Hide Notes" : "Show Notes"}
-                        </button>
-                        {expandedId === app.id && <p>{app.notes}</p>}
-                        <br/>
-                        <h1>status:</h1>
-                        <p>{statusLabels[app.status]}</p>
-                        <br/>
+                    <h3>Date applied</h3>
+                    <p>{app.date_applied}</p>
+
+                    <button onClick={() => setExpandedId(expandedId === app.id ? null : app.id)}>
+                        {expandedId === app.id ? "Hide Notes" : "Show Notes"}
+                    </button>
+
+                    {expandedId === app.id && <p>{app.notes}</p>}
+                    <br/>
+
+                    <h1>status:</h1>
+                    <p>{statusLabels[app.status]}</p>
+                    <br/>
+
+                    <div className="card-actions">
                         <button onClick={() => RemoveJob(app.id)}>remove</button>
                         <button onClick={() => navigate(`/edit-job/${app.id}`)}>edit</button>
                     </div>
-                    
-                ))}
 
-                <br/>
-                <button onClick={AddJob}>Add Job</button>
-                <button onClick={LogOut}> Log out </button>
-            </div>
+                </div>
+            ))}
+
+            <br/>
+            <button onClick={AddJob}>Add Job</button>
+            <button onClick={LogOut}> Log out </button>
+        </div>
         )
 }
 

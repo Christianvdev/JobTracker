@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111111;
+  font-family: 'Inter', sans-serif;
+}
+
+.login {
+  max-width: 400px;
+  margin: 120px auto;
+  padding: 40px 36px;
+  border: 1px solid #e5e5e5;
+  border-top: 4px solid #e02424;
+  border-radius: 8px;
+}
+
+.login h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 28px;
+}
+
+.login input {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #111111;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.login input:focus {
+  border-color: #e02424;
+}
+
+.login > button:nth-of-type(1) {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  background: #e02424;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.login > button:nth-of-type(1):hover {
+  background: #b81c1c;
+}
+
+.login > button:nth-of-type(2) {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: transparent;
+  color: #aaaaaa;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.login > button:nth-of-type(2):hover {
+  border-color: #aaaaaa;
+  color: #555555;
+}
