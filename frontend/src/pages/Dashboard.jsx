@@ -157,42 +157,49 @@ const EditJob = () => {
     }
 
 
+
     return(
         <div>
-            <input
-                placeholder="Company Name"
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
-            />
-            <br/>
-            <input
-                placeholder="Role title"
-                value={roleTitle}
-                onChange={(e) => setRoleTitle(e.target.value)}
-            />
-            <br/>
-            <input
-                placeholder="Job link"
-                value={jobLink}
-                onChange={(e) => setJobLink(e.target.value)}
-            />
-            <br/>
-            <input
-                placeholder="Notes"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-            />
-            <select value={status} onChange={(e) => setStatus(Number(e.target.value))}>
-                <option value="">Select status</option>
-                <option value="1">Applied</option>
-                <option value="2">Interviewing</option>
-                <option value="3">Offer_received</option>
-                <option value="4">Hired</option>
-                <option value="5">Not_selected_by_employer</option>
-                <option value="6">No_longer_interested</option>
-            </select>
-
-            <button onClick={handleSubmit}>Submit</button>
+            
+            <div className='manual-form'>
+                <h1 className='title'>Update status:</h1>
+                <input
+                    placeholder="Company Name"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                />
+                <br/>
+                <input
+                    placeholder="Role title"
+                    value={roleTitle}
+                    onChange={(e) => setRoleTitle(e.target.value)}
+                />
+                <br/>
+                <input
+                    placeholder="Job link"
+                    value={jobLink}
+                    onChange={(e) => setJobLink(e.target.value)}
+                />
+                <br/>
+                <input
+                    placeholder="Notes"
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                />
+                <select value={status} onChange={(e) => setStatus(Number(e.target.value))}>
+                    <option value="">Select status</option>
+                    <option value="1">Applied</option>
+                    <option value="2">Interviewing</option>
+                    <option value="3">Offer Received</option>
+                    <option value="4">Hired</option>
+                    <option value="5">Not Selected By Employer</option>
+                    <option value="6">No Longer Interested</option>
+                </select>
+                <br/>
+                <button onClick={handleSubmit}>Submit</button>
+                <br/>
+                <button onClick={() => navigate('/dashboard')}>Cancel</button>
+            </div>
         </div>
     )
 }
