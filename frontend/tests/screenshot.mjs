@@ -28,11 +28,15 @@ try {
   );
   await page.getByRole('button', { name: 'Register', exact: true }).click();
   await registration;
-  // Registration currently uses an alert rather than redirecting.
-  await page.getByRole('button', { name: /Already have an account/ }).click();
+  // Reload the login route after registration to avoid carrying form state between pages.
+  await page.goto(base, { waitUntil: 'networkidle' });
+  await page.getByRole('heading', { name: 'Login' }).waitFor();
   await page.getByPlaceholder('username').fill(username);
   await page.getByPlaceholder('password').fill('TestPassword123!');
+  const loginResponse = page.waitForResponse((response) => response.url().endsWith('/token/') && response.request().method() === 'POST');
   await page.getByRole('button', { name: 'Login', exact: true }).click();
+  const loginResult = await loginResponse;
+  assert.equal(loginResult.status(), 200, `Login failed: ${await loginResult.text()}`);
   await page.waitForURL('**/dashboard');
 
   await page.getByRole('button', { name: 'Add Job' }).click();
