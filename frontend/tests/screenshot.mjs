@@ -30,7 +30,7 @@ try {
   await registration;
   // Reload the login route after registration to avoid carrying form state between pages.
   await page.goto(base, { waitUntil: 'networkidle' });
-  await page.getByRole('heading', { name: 'Login' }).waitFor();
+  await page.getByRole('heading', { name: 'Welcome back' }).waitFor();
   await page.getByPlaceholder('username').fill(username);
   await page.getByPlaceholder('password').fill('TestPassword123!');
   const loginResponse = page.waitForResponse((response) => response.url().endsWith('/token/') && response.request().method() === 'POST');
