@@ -32,15 +32,14 @@ A full-stack job application tracker built with Django and React. Log jobs you'v
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/JobTracker.git
+git clone https://github.com/Christianvdev/JobTracker.git
 cd JobTracker
 ```
 
 ### 2. Backend setup
 
 ```bash
-cd JobTracker
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 Create a `.env` file in the `JobTracker/` directory:
@@ -48,6 +47,8 @@ Create a `.env` file in the `JobTracker/` directory:
 ```env
 SECRET_KEY=your_django_secret_key
 GROQ_API_KEY=your_groq_api_key
+DEBUG=True
+CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
 
 ```bash
@@ -73,6 +74,18 @@ npm run dev
 ```
 
 ---
+
+## Testing
+
+Run the backend tests after installing dependencies and configuring `SECRET_KEY`:
+
+```bash
+python manage.py test
+```
+
+The test suite covers job ownership, authenticated access, and AI parsing failures using mocked provider responses. Tests do not require a live Groq API key.
+
+**Note:** This repository does not currently include a backend `requirements.txt`. You will need to install the Python dependencies used by the project before running the commands above. The setup instructions will be fully reproducible once a dependency manifest is added.
 
 ## How the AI Parsing Works
 
