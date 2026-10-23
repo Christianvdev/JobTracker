@@ -67,6 +67,7 @@ try {
 
   await firstCard.getByRole('button', { name: 'edit' }).click();
   await page.waitForURL('**/edit-job/*');
+  await page.waitForFunction(() => document.querySelector('input[placeholder="Role title"]')?.value === 'Junior Software Developer');
   await page.getByPlaceholder('Role title').fill('Software Engineer I');
   await page.screenshot({ path: `${output}/05-edit-job.png`, fullPage: true });
   await page.getByRole('button', { name: 'Submit' }).click();
