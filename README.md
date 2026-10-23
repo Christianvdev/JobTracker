@@ -85,7 +85,7 @@ python manage.py test
 
 The test suite covers job ownership, authenticated access, and AI parsing failures using mocked provider responses. Tests do not require a live Groq API key.
 
-**Note:** This repository does not currently include a backend `requirements.txt`. You will need to install the Python dependencies used by the project before running the commands above. The setup instructions will be fully reproducible once a dependency manifest is added.
+The repository includes a backend `requirements.txt` and a GitHub Actions workflow that runs Django checks, tests, and the frontend production build on every push.
 
 ## How the AI Parsing Works
 
