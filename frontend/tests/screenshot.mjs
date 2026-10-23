@@ -12,11 +12,11 @@ page.on('pageerror', (error) => failures.push(error.message));
 
 try {
   await page.goto(base, { waitUntil: 'networkidle' });
-  await page.getByRole('heading', { name: 'Login' }).waitFor();
+  await page.getByRole('heading', { name: 'Welcome back' }).waitFor();
   await page.screenshot({ path: `${output}/01-login.png`, fullPage: true });
 
   await page.getByRole('button', { name: 'Register here.' }).click();
-  await page.getByRole('heading', { name: 'Register' }).waitFor();
+  await page.getByRole('heading', { name: 'Create your account' }).waitFor();
   const username = `visual_test_${Date.now()}`;
   await page.getByPlaceholder('username').fill(username);
   await page.getByPlaceholder('email').fill(`${username}@example.com`);
@@ -55,9 +55,26 @@ try {
   await page.getByPlaceholder('Company Name').fill('Example IT Services');
   await page.getByPlaceholder('Role title').fill('IT Support Technician');
   await page.getByPlaceholder('Notes').fill('Second sample application.');
+  await page.getByRole('combobox', { name: 'Application status' }).selectOption('2');
   await page.getByRole('button', { name: 'Submit' }).click();
   await page.waitForURL('**/dashboard');
   await page.getByText('Example IT Services').waitFor();
+
+  await page.getByRole('button', { name: 'Add Job' }).click();
+  await page.getByPlaceholder('Company Name').fill('Studio North');
+  await page.getByPlaceholder('Role title').fill('Product Designer');
+  await page.getByRole('combobox', { name: 'Application status' }).selectOption('3');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.waitForURL('**/dashboard');
+  await page.getByText('Studio North').waitFor();
+
+  await page.getByRole('button', { name: 'Add Job' }).click();
+  await page.getByPlaceholder('Company Name').fill('Acme Labs');
+  await page.getByPlaceholder('Role title').fill('Software Developer');
+  await page.getByRole('combobox', { name: 'Application status' }).selectOption('5');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.waitForURL('**/dashboard');
+  await page.getByText('Acme Labs').waitFor();
   await page.screenshot({ path: `${output}/03-dashboard.png`, fullPage: true });
 
   const firstCard = page.locator('.job-card').filter({ hasText: 'Example Software' });
@@ -75,10 +92,14 @@ try {
   await page.getByText('Software Engineer I').waitFor();
 
   const updatedCard = page.locator('.job-card').filter({ hasText: 'Example Software' });
+  page.once('dialog', dialog => dialog.accept());
   await updatedCard.getByRole('button', { name: 'remove' }).click();
   await updatedCard.waitFor({ state: 'detached' });
-  assert.equal(await page.locator('.job-card').count(), 1);
+  assert.equal(await page.locator('.job-card').count(), 3);
 
+  // Check the dashboard layout on a narrow phone viewport, too.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: `${output}/06-mobile-dashboard.png`, fullPage: true });
   assert.deepEqual(failures, [], 'Browser JavaScript errors occurred');
   console.log('PASS: register, login, add, list, expand notes, edit, and delete using real Django API');
   console.log('Screenshots saved in', output);
