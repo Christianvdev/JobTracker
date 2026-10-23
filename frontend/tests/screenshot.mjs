@@ -22,7 +22,6 @@ try {
   await page.getByPlaceholder('email').fill(`${username}@example.com`);
   await page.getByPlaceholder('password').fill('TestPassword123!');
 
-  page.once('dialog', (dialog) => dialog.accept());
   const registration = page.waitForResponse((response) =>
     response.url().includes('/api/accounts/register/') && response.status() === 201
   );
