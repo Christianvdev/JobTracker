@@ -1,1 +1,25 @@
 jobtracker/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.sqlite3-journal
+.venv/
+venv/
+.pytest_cache/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Node / frontend
+node_modules/
+dist/
+build/
+
+# Local tooling
+.DS_Store
+.idea/
+.vscode/
