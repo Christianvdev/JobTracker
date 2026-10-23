@@ -2,7 +2,7 @@
 import './App.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import RegisterPage from './pages/Register'
+import RegisterPage from './pages/register'
 import LoginPage from './pages/Login'
 import SubmitJob from './pages/AddJob'
 import { DashboardPage, EditJob } from './pages/Dashboard'
