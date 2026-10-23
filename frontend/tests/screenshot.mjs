@@ -23,7 +23,11 @@ try {
   await page.getByPlaceholder('password').fill('TestPassword123!');
 
   page.once('dialog', (dialog) => dialog.accept());
+  const registration = page.waitForResponse((response) =>
+    response.url().includes('/api/accounts/register/') && response.status() === 201
+  );
   await page.getByRole('button', { name: 'Register', exact: true }).click();
+  await registration;
   // Registration currently uses an alert rather than redirecting.
   await page.getByRole('button', { name: /Already have an account/ }).click();
   await page.getByPlaceholder('username').fill(username);
