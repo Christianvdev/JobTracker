@@ -12,6 +12,10 @@ on:
       - 'requirements.txt'
       - '.github/workflows/browser-screenshots.yml'
 
+concurrency:
+  group: jobtracker-browser-screenshots
+  cancel-in-progress: true
+
 jobs:
   browser:
     runs-on: ubuntu-latest
