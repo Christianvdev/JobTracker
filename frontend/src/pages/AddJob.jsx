@@ -12,6 +12,8 @@ const SubmitJob = () => {
     const [notes, setNotes] = useState('')
     const [rawText, setRawText] = useState('')
     const [parsing, setParsing] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
+    const [error, setError] = useState('')
 
     const navigate = useNavigate()
 
@@ -23,6 +25,8 @@ const SubmitJob = () => {
     }, [])
 
     const handleParse = async () => {
+        if (!rawText.trim() || parsing) return
+        setError('')
         setParsing(true)
         try {
             const response = await api.post('api/parse-job/', {
@@ -33,14 +37,23 @@ const SubmitJob = () => {
             setNotes(response.data.requirements?.join(', ') || '')
         }
         catch(err) {
-            console.log(err)
+            setError(err.response?.data?.detail || 'Unable to parse this description. You can enter the details manually.')
         }
-        setParsing(false)
+        finally {
+            setParsing(false)
+        }
     }
 
     const handleSubmit = async () => {
+        if (submitting) return
+        setError('')
+        if (!companyName.trim() || !roleTitle.trim()) {
+            setError('Company name and role title are required.')
+            return
+        }
+        setSubmitting(true)
         try{
-            const response = await api.post('api/jobs/', {
+            await api.post('api/jobs/', {
                 company_name: companyName,
                 role_title: roleTitle,
                 job_link: jobLink,
@@ -50,8 +63,10 @@ const SubmitJob = () => {
             navigate('/dashboard')
         }
         catch(err){
-            console.log('Error status', err.response.status)
-            console.log('Error data', err.response.data)
+            setError(err.response?.data?.detail || 'Could not save the application. Please try again.')
+        }
+        finally {
+            setSubmitting(false)
         }
     }
 
@@ -67,7 +82,7 @@ const SubmitJob = () => {
                     rows={6}
                 />
                 <br/>
-                <button onClick={handleParse}>
+                <button onClick={handleParse} disabled={parsing || !rawText.trim()}>
                     {parsing ? "Parsing..." : "Parse with AI"}
                 </button>
 
@@ -109,7 +124,8 @@ const SubmitJob = () => {
                     <option value="6">No Longer Interested</option>
                 </select>
                 <br/>
-                <button onClick={handleSubmit}>Submit</button>
+                {error && <p role="alert">{error}</p>}
+                <button onClick={handleSubmit} disabled={submitting}>{submitting ? 'Saving...' : 'Submit'}</button>
                 <br/>
                 <button onClick={() => navigate('/dashboard')}>Cancel</button>
             </div>
