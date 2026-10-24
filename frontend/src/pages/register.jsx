@@ -2,7 +2,7 @@ import '../styles/Register.css'
 import { useState } from 'react'
 import api from '../../api/axios'
 import { useNavigate } from 'react-router-dom'
-import { Brand, Icon } from '../components/Workspace'
+import { Brand, Icon, ThemeToggle } from '../components/Workspace'
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('')
@@ -28,7 +28,7 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-layout">
-      <header className="auth-header"><Brand /></header>
+      <header className="auth-header"><Brand /><ThemeToggle /></header>
       <main className="auth-center">
         <div className="auth-intro"><div className="auth-icon"><Icon name="briefcase" size={22} /></div><h1>Create your account</h1><p>A simpler way to stay on top of every opportunity.</p></div>
         {success ? <div className="auth-card success-card"><span className="success-icon"><Icon name="check" size={20} /></span><h2>You're all set.</h2><p>Your account has been created.</p><button className="button button-primary auth-submit" onClick={() => navigate('/')}>Continue to login <Icon name="arrow" size={16} /></button></div> :
