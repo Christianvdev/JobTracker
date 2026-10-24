@@ -353,6 +353,10 @@ h1, h2, h3, p {
   color: #17191e;
 }
 
+:root[data-theme="light"] .button-primary:hover {
+  color: #ffffff;
+}
+
 .button-secondary {
   background: var(--surface);
   border-color: var(--border);
