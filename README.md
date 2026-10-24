@@ -3,8 +3,9 @@
 A full-stack job application tracker built with Django and React. Log jobs you've applied to, track their status, and use the AI parsing feature to auto-fill application details from a raw job posting.
 
 ---
-<img width="946" height="356" alt="Screenshot 2026-07-06 235126" src="https://github.com/user-attachments/assets/038b0912-b93d-434e-9f62-3c36e8b293bb" />
-<img width="994" height="599" alt="Screenshot 2026-07-06 235118" src="https://github.com/user-attachments/assets/ba0c8e05-dcae-41bf-8400-b192ca1745a5" />
+<img width="452" height="295" alt="Screenshot 2026-10-23 193628" src="https://github.com/user-attachments/assets/ab69328c-6b79-4894-b429-f5b33c42e335" />
+<img width="448" height="293" alt="Screenshot 2026-10-23 193654" src="https://github.com/user-attachments/assets/39f0e094-3e14-489f-90c6-fe0fb9718f56" />
+
 
 ## Features
 
