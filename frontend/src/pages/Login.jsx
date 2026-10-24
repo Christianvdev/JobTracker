@@ -2,7 +2,7 @@ import '../styles/Login.css'
 import { useEffect, useState } from 'react'
 import api from '../../api/axios'
 import { useNavigate } from 'react-router-dom'
-import { Brand, Icon, ThemeToggle } from '../components/Workspace'
+import { Brand, Icon } from '../components/Workspace'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -28,7 +28,7 @@ export default function LoginPage() {
 
   return (
     <div className="auth-layout">
-      <header className="auth-header"><Brand /><ThemeToggle /></header>
+      <header className="auth-header"><Brand /></header>
       <main className="auth-center">
         <div className="auth-intro"><div className="auth-icon"><Icon name="briefcase" size={22} /></div><h1>Welcome back</h1><p>Sign in to your workspace to pick up where you left off.</p></div>
         <form className="auth-card" onSubmit={handleSubmit}>
