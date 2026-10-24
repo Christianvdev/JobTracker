@@ -1,83 +1,12 @@
-/* Optional AI helper on the Add Application page */
-.ai-panel {
-  margin-bottom: 20px;
-  padding: 24px 27px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface);
-}
-
-.ai-panel-heading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.ai-panel-icon {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--surface-hover);
-  color: var(--accent);
-}
-
-.ai-panel-heading h2 {
-  font-size: 13px;
-}
-
-.ai-panel-heading p {
-  margin-top: 5px;
-  color: var(--text-muted);
-  font-size: 11px;
-}
-
-.ai-panel textarea {
-  width: 100%;
-  min-height: 92px;
-  padding: 13px 14px;
-  resize: vertical;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  outline: none;
-  background: var(--input);
-  color: var(--text);
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.ai-panel textarea::placeholder {
-  color: var(--text-faint);
-}
-
-.ai-panel textarea:focus {
-  border-color: var(--accent);
-}
-
-.ai-panel-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 13px;
-}
-
-.ai-panel-footer span {
-  color: var(--text-faint);
-  font-size: 10px;
-}
-
-.ai-panel-footer .button {
-  padding: 10px 13px;
-}
-
-@media (max-width: 700px) {
-  .ai-panel { padding: 19px; }
-
-  .ai-panel-footer {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
+.ai-panel { background: #fafaf9; border: 1px solid #eaeae8; border-radius: 12px; padding: 24px 27px; margin-bottom: 19px; }
+.ai-panel-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.ai-panel-icon { display: grid; place-items: center; width: 37px; height: 37px; background: #f0f0ed; color: #777b78; border-radius: 9px; }
+.ai-panel-heading h2 { font-size: 13px; font-weight: 700; }
+.ai-panel-heading p { font-size: 11px; color: #a0a3a3; margin-top: 5px; }
+.ai-panel textarea { width: 100%; resize: vertical; min-height: 92px; background: #fff; border: 1px solid #e6e6e4; border-radius: 8px; padding: 12px 14px; outline: none; color: #343638; font-size: 12px; line-height: 1.5; }
+.ai-panel textarea::placeholder { color: #b1b4b4; }
+.ai-panel textarea:focus { border-color: #8c9293; }
+.ai-panel-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 13px; }
+.ai-panel-footer span { color: #a3a6a6; font-size: 10px; }
+.ai-panel-footer .button { padding: 10px 13px; }
+@media(max-width: 700px) { .ai-panel { padding: 19px; } .ai-panel-footer { align-items: flex-start; flex-direction: column; } }
