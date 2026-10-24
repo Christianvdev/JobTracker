@@ -7,7 +7,17 @@
 }
 
 .auth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 32px 44px;
+}
+
+.auth-header .theme-button {
+  width: auto;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .auth-center {
