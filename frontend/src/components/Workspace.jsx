@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 
 export function Icon({ name, size = 18, strokeWidth = 1.8, ...props }) {
@@ -19,6 +20,8 @@ export function Icon({ name, size = 18, strokeWidth = 1.8, ...props }) {
     check: <path d="m5 12 4 4L19 6" />,
     close: <path d="M18 6 6 18M6 6l12 12" />,
     filter: <><path d="M4 7h16M7 12h10M10 17h4" /></>,
+    moon: <path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z" />,
+    sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></>,
   }
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>{paths[name] || paths.briefcase}</svg>
 }
@@ -41,6 +44,31 @@ export function Brand({ compact = false }) {
   return <div className="brand"><span className="brand-mark"><Icon name="briefcase" size={17} strokeWidth={2} /></span>{!compact && <span className="brand-wordmark">folio<span className="brand-period">.</span></span>}</div>
 }
 
+// Keep the theme choice when navigating between pages.
+export function ThemeToggle() {
+  const [theme, setTheme] = useState(() => localStorage.getItem('jobtracker-theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('jobtracker-theme', theme)
+  }, [theme])
+
+  const nextTheme = theme === 'dark' ? 'light' : 'dark'
+
+  return (
+    <button
+      type="button"
+      className="nav-item theme-button"
+      onClick={() => setTheme(nextTheme)}
+      aria-label={`Switch to ${nextTheme} mode`}
+      title={`Switch to ${nextTheme} mode`}
+    >
+      <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={17} />
+      <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+    </button>
+  )
+}
+
 export default function Workspace({ active, children }) {
   const navigate = useNavigate()
   const logout = () => {
@@ -60,6 +88,7 @@ export default function Workspace({ active, children }) {
         <div className="sidebar-spacer" />
         <div className="sidebar-bottom">
           <div className="sidebar-hint"><span className="sidebar-hint-icon"><Icon name="briefcase" size={16} /></span><span><strong>Your career, organized.</strong><small>One opportunity at a time.</small></span></div>
+          <ThemeToggle />
           <button className="nav-item sign-out" onClick={logout}><Icon name="logout" size={17} /> <span>Sign out</span></button>
         </div>
       </aside>
